@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Git Going</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color:  #99ccff;
+            transition: background-color 0.5s;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .greeting-box {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="todo.html">To-Do List</a>
+        <a href="contributor.html">Contributor Page</a>
+    </nav>
+
+    <h1>Welcome to Git Going!</h1>
+    <p>This is a simple website with some interactive features.</p>
+    
+    <div class="greeting-box">
+        <h2>Personal Greeting</h2>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="greetUser()">Greet Me</button>
+        <p id="greetingMessage"></p>
+    </div>
+    
+    <button onclick="changeBackground()">Change Background Color</button>
+    
+    <script>
+        function greetUser() {
+            const name = document.getElementById('nameInput').value;
+            const message = name ? `Hello, ${name}! Welcome to our website!` : 'Please enter your name first!';
+            document.getElementById('greetingMessage').textContent = message;
+        }
+
+        function changeBackground() {
+            const colors = ['#ffcccc', '#ccffcc', '#ccccff', '#ffffcc', '#ffccff', '#ccffff', '#f0f0f0'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        }
+    </script>
+</body>
+</html>

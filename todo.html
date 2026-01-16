@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List - My Simple Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color:  #99ccff;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .todo-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #todoInput {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        #addBtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        #addBtn:hover {
+            background-color: #45a049;
+        }
+        .todo-list {
+            list-style: none;
+            padding: 0;
+        }
+        .todo-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #4CAF50;
+        }
+        .todo-item.completed {
+            opacity: 0.6;
+            border-left-color: #ccc;
+        }
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+        }
+        .todo-text {
+            flex: 1;
+            font-size: 16px;
+        }
+        .todo-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .complete-btn, .delete-btn {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .complete-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        .complete-btn:hover {
+            background-color: #0b7dda;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .delete-btn:hover {
+            background-color: #da190b;
+        }
+        .stats {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="todo.html">To-Do List</a>
+    </nav>
+
+    <h1>📝 To-Do List</h1>
+    
+    <div class="todo-container">
+        <div class="input-group">
+            <input type="text" id="todoInput" placeholder="Enter a new task...">
+            <button id="addBtn" onclick="addTodo()">Add Task</button>
+        </div>
+        
+        <ul class="todo-list" id="todoList"></ul>
+        
+        <div class="stats" id="stats">
+            <strong>Total Tasks: 0 | Completed: 0 | Remaining: 0</strong>
+        </div>
+    </div>
+    
+    <script>
+        let todos = [];
+
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+            
+            if (text === '') {
+                alert('Please enter a task!');
+                return;
+            }
+            
+            const todo = {
+                id: Date.now(),
+                text: text,
+                completed: false
+            };
+            
+            todos.push(todo);
+            input.value = '';
+            renderTodos();
+        }
+
+        function toggleComplete(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.completed = !todo.completed;
+                renderTodos();
+            }
+        }
+
+        function deleteTodo(id) {
+            todos = todos.filter(t => t.id !== id);
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const list = document.getElementById('todoList');
+            list.innerHTML = '';
+            
+            todos.forEach(todo => {
+                const li = document.createElement('li');
+                li.className = 'todo-item' + (todo.completed ? ' completed' : '');
+                
+                li.innerHTML = `
+                    <span class="todo-text">${todo.text}</span>
+                    <div class="todo-actions">
+                        <button class="complete-btn" onclick="toggleComplete(${todo.id})">
+                            ${todo.completed ? 'Undo' : 'Complete'}
+                        </button>
+                        <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
+                    </div>
+                `;
+                
+                list.appendChild(li);
+            });
+            
+            updateStats();
+        }
+
+        function updateStats() {
+            const total = todos.length;
+            const completed = todos.filter(t => t.completed).length;
+            const remaining = total - completed;
+            
+            document.getElementById('stats').innerHTML = `
+                <strong>Total Tasks: ${total} | Completed: ${completed} | Remaining: ${remaining}</strong>
+            `;
+        }
+
+        // Allow Enter key to add task
+        document.getElementById('todoInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+    </script>
+</body>
+</html>

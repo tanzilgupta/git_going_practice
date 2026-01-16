@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gallery - My Simple Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color:  #99ccff;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            height: 150px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="todo.html">To-Do list</a>
+        <a href="contributor.html">Contributor Page</a>
+        <!-- <a href="todo.html">To-Do List</a> -->
+    </nav>
+
+    <h1>Gallery</h1>
+    <p>A simple photo gallery.</p>
+    
+    <div class="gallery">
+        <div class="gallery-item" style="background-color: #ffb3ba;">🌅</div>
+        <div class="gallery-item" style="background-color: #ffdfba;">🌸</div>
+        <div class="gallery-item" style="background-color: #ffffba;">🌊</div>
+        <div class="gallery-item" style="background-color: #baffc9;">🌲</div>
+        <div class="gallery-item" style="background-color: #bae1ff;">⛰️</div>
+        <div class="gallery-item" style="background-color: #e0bbff;">🌙</div>
+        <div class="gallery-item" style="background-color: #c90e0e9c;">👀</div>
+    </div>
+</body>
+</html>
